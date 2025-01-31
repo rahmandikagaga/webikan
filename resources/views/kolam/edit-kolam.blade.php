@@ -26,19 +26,21 @@
         <section class="forms-container">
             <div class="form-section">
                 <h2 class="pb-4 fw-bold">Tambah Kolam Baru</h2>
-                <form action="{{ url('/store-kolam') }}" method="POST">
+                <form action="{{ url('/update-kolam/'.$kolam->id) }}" method="POST">
                     @csrf
+                    @method('PUT') <!-- Wajib agar Laravel tahu ini PUT -->
+
                     <div class="form-group">
                         <label for="nama">Nama Kolam</label>
-                        <input type="text" id="nama" name="nama" required />
+                        <input type="text" id="nama" name="nama" value="{{ $kolam->nama }}" required />
                     </div>
 
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input type="number" id="jumlah" name="jumlah" min="0" required />
+                        <input type="number" id="jumlah" name="jumlah" value="{{ $kolam->jumlah }}" min="0" required />
                     </div>
 
-                    <button type="submit" class="btn-submit">Tambahkan Kolam</button>
+                    <button type="submit" class="btn-submit">Update Kolam</button>
                 </form>
 
             </div>

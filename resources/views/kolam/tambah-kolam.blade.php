@@ -38,43 +38,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Kolam Bioflok</td>
-                        <td>4</td>
-                        <td>
-                            <button class="btn-edit">Edit</button>
-                            <button class="btn-delete">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Kolam Beton</td>
-                        <td>2</td>
-                        <td>
-                            <button class="btn-edit">Edit</button>
-                            <button class="btn-delete">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Kolam Terpal</td>
-                        <td>2</td>
-                        <td>
-                            <button class="btn-edit">Edit</button>
-                            <button class="btn-delete">Hapus</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kolam Tanah</td>
-                        <td>2</td>
-                        <td>
-                            <button class="btn-edit">Edit</button>
-                            <button class="btn-delete">Hapus</button>
-                        </td>
-                    </tr>
-                    <!-- Tambahkan baris contoh lainnya sesuai kebutuhan -->
+                    @foreach ($kolams as $kolam)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kolam->nama }}</td>
+                            <td>{{ $kolam->jumlah }}</td>
+                            <td>
+                                <!-- Tombol Edit -->
+                                <a href="{{ url('/update-kolam/'.$kolam->id) }}" class="btn-edit">Edit</a>
+
+                                <!-- Tombol Delete (dalam form) -->
+                                <form action="{{ url('/delete-kolam/'.$kolam->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn-delete" onclick="return confirm('Yakin ingin menghapus kolam ini?')">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>

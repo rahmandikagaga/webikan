@@ -32,7 +32,23 @@ Route::get('/add-pemanenan', function () {
     return view('pemanenan.add-pemanenan'); // Mengarahkan ke views/barang/index.blade.php
 });
 
+Route::get('/edit-kolam', function () {
+    return view('kolam.edit-kolam'); // Mengarahkan ke views/barang/index.blade.php
+});
+
 Route::get('/jenis-ikan', [JenisIkanController::class, 'jenisIkan']);
 
 Route::get('/jenis-ikan', [JenisIkanController::class, 'index'])->name('jenis-ikan.index');
 
+use App\Http\Controllers\KolamController;
+
+Route::get('/jenis-kolam', [KolamController::class, 'index']);
+Route::get('/add-kolam', [KolamController::class, 'create']);
+Route::post('/store-kolam', [KolamController::class, 'store']);
+
+// Route untuk edit
+Route::get('/edit-kolam/{id}', [KolamController::class, 'edit'])->name('kolam.edit');
+Route::put('/update-kolam/{id}', [KolamController::class, 'update'])->name('kolam.update');
+
+// Route untuk hapus
+Route::post('/delete-kolam/{id}', [KolamController::class, 'destroy']);
